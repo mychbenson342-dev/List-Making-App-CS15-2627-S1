@@ -1,45 +1,56 @@
-list = []
 previous_list = []
+to_do_list = []
+completed_list = []
+
 while True:
-    guess = input ("1. Add Item\n"
-           "2. Remove Item\n"
-           "3. Display List\n"
-           "4. Undo Item\n"
-           "5. Exit\n"
-    )
+    guess = input("1. Add Item\n"
+                  "2. Remove Item\n"
+                  "3. Display Lists\n"
+                  "4. Undo Item\n"
+                  "5. Replace Item\n"
+                  "6. Check off Item\n"
+                  "7. Exit\n"
+                  )
+
     if guess == "1":
-        previous_list = list.copy()
-        item_add = input ("What Item would you like to add!\n")
-        list.append(item_add)
+        previous_list = to_do_list.copy()
+        to_do_list.append(input("What item would you like to add?\n"))
 
     elif guess == "2":
-        if len(list) == 0:
-            print("Your list is empty!")
-        else:
-            print("Current List:")
-            for index, item in enumerate(list):
-                print(index, ":", item)
-
-            guess2 = int(input("What Item number from the list would you like to remove!\n"))
-
-            previous_list = list.copy()
-
-            if 0 <= guess2 < len(list):
-                list.pop(guess2)
-            else:
-                print("Invalid index number.")
-
+        index = 0
+        for item in to_do_list:
+            print(index, ":", item)
+            index += 1
+        previous_list = to_do_list.copy()
+        to_do_list.pop(int(input("What item number to remove?\n")))
 
     elif guess == "3":
-        print(f"list: {list}")
-        for index, item in enumerate(list):
-            print(index, ":", item)
+        print("To-Do:", to_do_list)
+        print("Completed:", completed_list)
 
     elif guess == "4":
-        list = previous_list.copy()
+        to_do_list = previous_list.copy()
         print("Undo done")
 
-    if guess == "5":
+    elif guess == "5":
+        index = 0
+        for item in to_do_list:
+            print(index, ":", item)
+            index += 1
+        replace_index = int(input("What item number to replace?\n"))
+        previous_list = to_do_list.copy()
+        new_item = input("New item name?\n")
+        to_do_list[replace_index] = to_do_list[replace_index].replace(to_do_list[replace_index], new_item)
+
+    elif guess == "6":
+        index = 0
+        for item in to_do_list:
+            print(index, ":", item)
+            index += 1
+        previous_list = to_do_list.copy()
+        check_index = int(input("What item number to check off?\n"))
+        finished_item = to_do_list.pop(check_index)
+        completed_list.append(finished_item)
+
+    elif guess == "7":
         exit()
-
-
